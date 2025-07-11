@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![简体中文](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-blue.svg)](README_zh.md)
-[![English](https://img.shields.io/badge/English-blue.svg)](README_en.md)
+[![English](https://img.shields.io/badge/English-blue.svg)](README.md)
 
 
 **Capture the glow of a fleeting thought, and share it when you're together.**
