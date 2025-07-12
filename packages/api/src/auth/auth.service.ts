@@ -35,13 +35,21 @@ export class AuthService {
     return { message: 'User registered successfully' };
   }
 
-  async login(email: string, pass: string) {
+  async login(email: string, password: string) {
+    console.log('Login attempt for email:', email);
+    
     const user = await this.prisma.user.findUnique({ where: { email } });
+    console.log('User found:', user ? 'Yes' : 'No');
+    
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const isPasswordMatching = await bcrypt.compare(pass, user.password);
+    const isPasswordMatching = await bcrypt.compare(password, user.password);
+    console.log('Password:', password);
+    console.log('User password:', user.password);
+    console.log('Password match:', isPasswordMatching);
+    
     if (!isPasswordMatching) {
       throw new UnauthorizedException('Invalid credentials');
     }

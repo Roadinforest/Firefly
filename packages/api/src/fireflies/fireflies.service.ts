@@ -52,7 +52,9 @@ export class FirefliesService {
     });
 
     if (!jar) {
-      throw new NotFoundException('User is not part of any jar');
+      // 临时：返回空数组而不是抛出错误
+      return [];
+      // throw new NotFoundException('User is not part of any jar');
     }
 
     // 2. 返回这个 Jar 下的所有萤火虫

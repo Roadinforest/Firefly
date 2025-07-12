@@ -10,13 +10,14 @@ export default defineConfig({
     react(),
     tailwindcss(), // 将插件添加到 plugins 数组中
   ],
-  // 我们之前添加的 proxy 保持不变，它依然有用
   server: {
     proxy: {
       "/api": {
         target: "http://localhost:3000",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        secure: false,
+        // 移除 rewrite 规则，保持 /api 前缀
+        // rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
