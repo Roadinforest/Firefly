@@ -1,8 +1,9 @@
 // packages/web/vite.config.ts
 
+import path from "path";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite"; // 导入 Vite 插件
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -10,13 +11,18 @@ export default defineConfig({
     react(),
     tailwindcss(), // 将插件添加到 plugins 数组中
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   server: {
     proxy: {
       "/api": {
         target: "http://localhost:3000",
         changeOrigin: true,
         secure: false,
-        // 移除 rewrite 规则，保持 /api 前缀
+        // 需要重写路径，移除 /api 前缀，因为后端已经设置了全局前缀
         // rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },

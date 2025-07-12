@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -7,7 +7,7 @@ export class FirefliesService {
 
   async create(content: string, userId: string) {
     // 1. 根据 userId 找到用户所在的 Jar
-    const jar = await this.prisma.jar.findFirst({
+    let jar = await this.prisma.jar.findFirst({
       where: {
         OR: [
           { user1Id: userId },
@@ -16,8 +16,15 @@ export class FirefliesService {
       }
     });
 
+    // 如果用户没有 Jar，创建一个单人 Jar
     if (!jar) {
-      throw new NotFoundException('User is not part of any jar');
+      console.log('User is not part of any jar, creating a single-user jar');
+      jar = await this.prisma.jar.create({
+        data: {
+          user1Id: userId,
+          // user2Id 现在是可选的，不设置就是单人 Jar
+        }
+      });
     }
 
     // 2. 创建新的萤火虫并关联到 Jar
@@ -52,9 +59,8 @@ export class FirefliesService {
     });
 
     if (!jar) {
-      // 临时：返回空数组而不是抛出错误
+      // 如果用户没有 Jar，返回空数组
       return [];
-      // throw new NotFoundException('User is not part of any jar');
     }
 
     // 2. 返回这个 Jar 下的所有萤火虫

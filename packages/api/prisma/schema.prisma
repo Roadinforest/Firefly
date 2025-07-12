@@ -41,12 +41,12 @@ model User {
 }
 
 model Jar {
-  id      String @id @default(cuid())
-  user1Id String @unique
-  user2Id String @unique
+  id      String  @id @default(cuid())
+  user1Id String  @unique
+  user2Id String? @unique // 改为可选，支持单人 Jar
 
-  user1 User @relation("User1", fields: [user1Id], references: [id])
-  user2 User @relation("User2", fields: [user2Id], references: [id])
+  user1 User  @relation("User1", fields: [user1Id], references: [id])
+  user2 User? @relation("User2", fields: [user2Id], references: [id]) // 改为可选关系
 
   fireflies Firefly[]
 }

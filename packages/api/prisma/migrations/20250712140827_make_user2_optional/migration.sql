@@ -1,0 +1,8 @@
+-- DropForeignKey
+ALTER TABLE "Jar" DROP CONSTRAINT "Jar_user2Id_fkey";
+
+-- AlterTable
+ALTER TABLE "Jar" ALTER COLUMN "user2Id" DROP NOT NULL;
+
+-- AddForeignKey
+ALTER TABLE "Jar" ADD CONSTRAINT "Jar_user2Id_fkey" FOREIGN KEY ("user2Id") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
