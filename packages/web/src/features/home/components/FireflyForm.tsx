@@ -2,8 +2,9 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { type FireflyFormValues, fireflySchema } from "../types";
+import { createFireflySchema, type FireflyFormValues } from "../types";
 import { useCreateFirefly } from "../api/useCreateFirefly";
+import { useTranslation } from "react-i18next";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -17,9 +18,10 @@ import { Input } from "@/components/ui/input";
 
 export function FireflyForm() {
   const createFireflyMutation = useCreateFirefly();
+  const { t } = useTranslation();
 
   const form = useForm<FireflyFormValues>({
-    resolver: zodResolver(fireflySchema),
+    resolver: zodResolver(createFireflySchema(t)),
     defaultValues: { content: "" },
   });
 
@@ -27,11 +29,11 @@ export function FireflyForm() {
     createFireflyMutation.mutate(values, {
       onSuccess: () => {
         form.reset();
-        toast.success("萤火虫发送成功！");
+        toast.success(t('firefly.createSuccess'));
       },
       onError: () => {
-        toast.error("发送失败", {
-          description: "请稍后重试",
+        toast.error(t('firefly.createFailed'), {
+          description: t('common.tryAgain'),
         });
       },
     });
@@ -47,7 +49,7 @@ export function FireflyForm() {
             <FormItem className="flex-1">
               <FormControl>
                 <Input 
-                  placeholder="写点什么吧..." 
+                  placeholder={t('firefly.contentPlaceholder')} 
                   {...field} 
                   className="border p-2"
                 />
@@ -61,7 +63,7 @@ export function FireflyForm() {
           className="bg-green-500 text-white px-4 rounded"
           disabled={createFireflyMutation.isPending}
         >
-          {createFireflyMutation.isPending ? "发送中..." : "发送"}
+          {createFireflyMutation.isPending ? t('common.sending') : t('common.send')}
         </Button>
       </form>
     </Form>

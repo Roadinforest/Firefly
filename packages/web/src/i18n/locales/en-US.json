@@ -1,0 +1,109 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "close": "Close",
+    "submit": "Submit",
+    "reset": "Reset",
+    "send": "Send",
+    "sending": "Sending...",
+    "tryAgain": "Please try again later"
+  },
+  "auth": {
+    "login": {
+      "title": "Login to Firefly",
+      "description": "Enter your credentials to access your account.",
+      "email": "Email",
+      "password": "Password",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "••••••••",
+      "loginButton": "Login",
+      "noAccount": "Don't have an account?",
+      "registerHere": "Register here",
+      "loginSuccess": "Login Successful",
+      "loginFailed": "Login Failed",
+      "checkCredentials": "Please check your credentials."
+    },
+    "register": {
+      "title": "Register Firefly",
+      "description": "Create your account to get started.",
+      "email": "Email",
+      "password": "Password",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "••••••••",
+      "registerButton": "Register",
+      "hasAccount": "Already have an account?",
+      "clickToLogin": "Click to login",
+      "registerSuccess": "Registration successful, please login",
+      "registerFailed": "Registration failed",
+      "checkInfo": "Please check your information."
+    },
+    "validation": {
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address",
+      "passwordRequired": "Password is required",
+      "passwordMinLength": "Password must be at least 3 characters"
+    }
+  },
+  "home": {
+    "title": "Firefly",
+    "welcome": "Welcome to Firefly",
+    "description": "This is a simple firefly application",
+    "createFirefly": "Create Firefly",
+    "fireflyList": "Firefly List",
+    "noFireflies": "No fireflies yet",
+    "createFirst": "Create your first firefly"
+  },
+  "firefly": {
+    "name": "Name",
+    "description": "Description",
+    "color": "Color",
+    "brightness": "Brightness",
+    "create": "Create Firefly",
+    "edit": "Edit Firefly",
+    "delete": "Delete Firefly",
+    "namePlaceholder": "Enter firefly name",
+    "descriptionPlaceholder": "Enter firefly description",
+    "colorPlaceholder": "Select color",
+    "brightnessPlaceholder": "Select brightness",
+    "contentPlaceholder": "Write something...",
+    "createSuccess": "Firefly sent successfully!",
+    "createFailed": "Send failed",
+    "deleteSuccess": "Firefly deleted successfully",
+    "deleteFailed": "Failed to delete firefly",
+    "editSuccess": "Firefly updated successfully",
+    "editFailed": "Failed to update firefly"
+  },
+  "navigation": {
+    "home": "Home",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English",
+    "switchLanguage": "Switch Language"
+  },
+  "errors": {
+    "networkError": "Network Error",
+    "serverError": "Server Error",
+    "unauthorized": "Unauthorized Access",
+    "forbidden": "Forbidden",
+    "notFound": "Page Not Found",
+    "unknownError": "Unknown Error"
+  }
+} 

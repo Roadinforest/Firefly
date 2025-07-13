@@ -3,8 +3,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 import { useAuthStore } from "@/store";
-import { loginSchema, type LoginFormValues } from "../types";
+import { createLoginSchema, type LoginFormValues } from "../types";
 import { useLogin } from "../api/useLogin";
 
 import { Button } from "@/components/ui/button";
@@ -27,11 +28,12 @@ import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { setToken } = useAuthStore();
   const loginMutation = useLogin();
 
   const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(createLoginSchema(t)),
     defaultValues: { email: "", password: "" },
   });
 
@@ -39,12 +41,12 @@ export function LoginForm() {
     loginMutation.mutate(values, {
       onSuccess: (data) => {
         setToken(data.access_token);
-        toast.success("Login Successful");
+        toast.success(t('auth.login.loginSuccess'));
         navigate("/");
       },
       onError: () => {
-        toast.error("Login Failed", {
-          description: "Please check your credentials.",
+        toast.error(t('auth.login.loginFailed'), {
+          description: t('auth.login.checkCredentials'),
         });
       },
     });
@@ -53,9 +55,9 @@ export function LoginForm() {
   return (
     <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>Login to Firefly</CardTitle>
+        <CardTitle>{t('auth.login.title')}</CardTitle>
         <CardDescription>
-          Enter your credentials to access your account.
+          {t('auth.login.description')}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -66,9 +68,9 @@ export function LoginForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>{t('auth.login.email')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="you@example.com" {...field} />
+                    <Input placeholder={t('auth.login.emailPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -79,23 +81,23 @@ export function LoginForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>{t('auth.login.password')}</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <Input type="password" placeholder={t('auth.login.passwordPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <Button type="submit" className="w-full">
-              Login
+              {t('auth.login.loginButton')}
             </Button>
           </form>
         </Form>
         <div className="mt-4 text-center text-sm">
-          <span className="text-muted-foreground">Don't have an account? </span>
+          <span className="text-muted-foreground">{t('auth.login.noAccount')} </span>
           <Link to="/register" className="text-primary hover:underline">
-            Register here
+            {t('auth.login.registerHere')}
           </Link>
         </div>
       </CardContent>

@@ -1,0 +1,110 @@
+{
+  "common": {
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "cancel": "取消",
+    "confirm": "确认",
+    "save": "保存",
+    "delete": "删除",
+    "edit": "编辑",
+    "add": "添加",
+    "search": "搜索",
+    "back": "返回",
+    "next": "下一步",
+    "previous": "上一步",
+    "close": "关闭",
+    "submit": "提交",
+    "reset": "重置",
+    "send": "发送",
+    "sending": "发送中...",
+    "tryAgain": "请稍后重试"
+  },
+  "auth": {
+    "login": {
+      "title": "登录 Firefly",
+      "description": "输入您的凭据以访问您的账户。",
+      "email": "邮箱",
+      "password": "密码",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "••••••••",
+      "loginButton": "登录",
+      "noAccount": "没有账户？",
+      "registerHere": "在此注册",
+      "loginSuccess": "登录成功",
+      "loginFailed": "登录失败",
+      "checkCredentials": "请检查您的凭据。"
+    },
+    "register": {
+      "title": "注册 Firefly",
+      "description": "创建您的账户以开始使用。",
+      "email": "邮箱",
+      "password": "密码",
+      "emailPlaceholder": "you@example.com",
+      "passwordPlaceholder": "••••••••",
+      "registerButton": "注册",
+      "hasAccount": "已有账户？",
+      "clickToLogin": "点击登录",
+      "registerSuccess": "注册成功，请登录",
+      "registerFailed": "注册失败",
+      "checkInfo": "请检查您的信息。"
+    },
+    "validation": {
+      "emailRequired": "邮箱是必填项",
+      "emailInvalid": "请输入有效的邮箱地址",
+      "passwordRequired": "密码是必填项",
+      "passwordMinLength": "密码至少需要3个字符"
+    }
+  },
+  "home": {
+    "title": "萤火虫",
+    "welcome": "欢迎来到萤火虫",
+    "description": "这是一个简单的萤火虫应用",
+    "createFirefly": "创建萤火虫",
+    "fireflyList": "萤火虫列表",
+    "noFireflies": "暂无萤火虫",
+    "createFirst": "创建第一个萤火虫"
+  },
+  "firefly": {
+    "name": "名称",
+    "description": "描述",
+    "color": "颜色",
+    "brightness": "亮度",
+    "create": "创建萤火虫",
+    "edit": "编辑萤火虫",
+    "delete": "删除萤火虫",
+    "namePlaceholder": "输入萤火虫名称",
+    "descriptionPlaceholder": "输入萤火虫描述",
+    "colorPlaceholder": "选择颜色",
+    "brightnessPlaceholder": "选择亮度",
+    "contentPlaceholder": "写点什么吧...",
+    "createSuccess": "萤火虫发送成功！",
+    "createFailed": "发送失败",
+    "deleteSuccess": "萤火虫删除成功",
+    "deleteFailed": "萤火虫删除失败",
+    "editSuccess": "萤火虫更新成功",
+    "editFailed": "萤火虫更新失败",
+    "contentRequired": "内容不能为空"
+  },
+  "navigation": {
+    "home": "首页",
+    "login": "登录",
+    "register": "注册",
+    "logout": "退出登录",
+    "profile": "个人资料",
+    "settings": "设置"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English",
+    "switchLanguage": "切换语言"
+  },
+  "errors": {
+    "networkError": "网络错误",
+    "serverError": "服务器错误",
+    "unauthorized": "未授权访问",
+    "forbidden": "禁止访问",
+    "notFound": "页面未找到",
+    "unknownError": "未知错误"
+  }
+} 

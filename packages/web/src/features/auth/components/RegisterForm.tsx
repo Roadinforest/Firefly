@@ -3,7 +3,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
-import { registerSchema, type RegisterFormValues } from "../types";
+import { useTranslation } from "react-i18next";
+import { createRegisterSchema, type RegisterFormValues } from "../types";
 import { useRegister } from "../api/useRegister";
 
 import { Button } from "@/components/ui/button";
@@ -26,22 +27,26 @@ import { Input } from "@/components/ui/input";
 
 export function RegisterForm() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const registerMutation = useRegister();
 
   const form = useForm<RegisterFormValues>({
-    resolver: zodResolver(registerSchema),
+    resolver: zodResolver(createRegisterSchema(t)),
     defaultValues: { email: "", password: "" },
   });
 
   async function onSubmit(values: RegisterFormValues) {
     registerMutation.mutate(values, {
       onSuccess: () => {
-        toast.success("注册成功，请登录");
+        toast.success(t('auth.register.registerSuccess'));
         navigate("/login");
       },
-      onError: (error: any) => {
-        toast.error("注册失败", {
-          description: error.response?.data?.message || "请检查您的信息。",
+      onError: (error: unknown) => {
+        const errorMessage = error && typeof error === 'object' && 'response' in error 
+          ? (error.response as { data?: { message?: string } })?.data?.message 
+          : undefined;
+        toast.error(t('auth.register.registerFailed'), {
+          description: errorMessage || t('auth.register.checkInfo'),
         });
       },
     });
@@ -50,9 +55,9 @@ export function RegisterForm() {
   return (
     <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>注册 Firefly</CardTitle>
+        <CardTitle>{t('auth.register.title')}</CardTitle>
         <CardDescription>
-          创建您的账户以开始使用。
+          {t('auth.register.description')}
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -63,9 +68,9 @@ export function RegisterForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>邮箱</FormLabel>
+                  <FormLabel>{t('auth.register.email')}</FormLabel>
                   <FormControl>
-                    <Input placeholder="you@example.com" {...field} />
+                    <Input placeholder={t('auth.register.emailPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -76,23 +81,23 @@ export function RegisterForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>密码</FormLabel>
+                  <FormLabel>{t('auth.register.password')}</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <Input type="password" placeholder={t('auth.register.passwordPlaceholder')} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
             <Button type="submit" className="w-full">
-              注册
+              {t('auth.register.registerButton')}
             </Button>
           </form>
         </Form>
         <div className="mt-4 text-center text-sm">
-          <span className="text-muted-foreground">已有账户？</span>
+          <span className="text-muted-foreground">{t('auth.register.hasAccount')}</span>
           <Link to="/login" className="text-primary hover:underline">
-            点击登录
+            {t('auth.register.clickToLogin')}
           </Link>
         </div>
       </CardContent>

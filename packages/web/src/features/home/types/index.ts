@@ -1,11 +1,11 @@
 // src/features/home/types/index.ts
 import { z } from "zod";
 
-export const fireflySchema = z.object({
-  content: z.string().min(1, { message: "内容不能为空" }),
+export const createFireflySchema = (t: (key: string) => string) => z.object({
+  content: z.string().min(1, { message: t('firefly.contentRequired') }),
 });
 
-export type FireflyFormValues = z.infer<typeof fireflySchema>;
+export type FireflyFormValues = z.infer<ReturnType<typeof createFireflySchema>>;
 
 export interface Firefly {
   id: string;
