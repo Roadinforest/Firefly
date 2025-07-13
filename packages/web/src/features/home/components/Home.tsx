@@ -1,7 +1,7 @@
 // src/features/home/components/Home.tsx
 import { useAuthStore } from "@/store";
 import { FireflyForm } from "./FireflyForm";
-import { FireflyList } from "./FireflyList";
+import FireflyList from "./FireflyList";
 import { Button } from "@/components/ui/button";
 
 export function Home() {

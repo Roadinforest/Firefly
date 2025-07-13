@@ -1,11 +1,44 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { 
+  FireflyResponseDto, 
+  FirefliesListResponseDto 
+} from './dto';
 
 @Injectable()
 export class FirefliesService {
   constructor(private prisma: PrismaService) {}
 
-  async create(content: string, userId: string) {
+  async getFireflies(
+    page: number = 1, 
+    limit: number = 10
+  ): Promise<FirefliesListResponseDto> {
+    const skip = (page - 1) * limit;
+    
+    const [fireflies, total] = await Promise.all([
+      this.prisma.firefly.findMany({
+        skip,
+        take: limit,
+        orderBy: { createdAt: 'desc' },
+        include: {
+          author: {
+            select: { email: true }
+          }
+        }
+      }),
+      this.prisma.firefly.count()
+    ]);
+
+    return {
+      fireflies,
+      total
+    };
+  }
+
+  async createFirefly(
+    content: string, 
+    userId: string
+  ): Promise<FireflyResponseDto> {
     // 1. 根据 userId 找到用户所在的 Jar
     let jar = await this.prisma.jar.findFirst({
       where: {
@@ -32,55 +65,15 @@ export class FirefliesService {
       data: {
         content,
         authorId: userId,
-        jarId: jar.id,
+        jarId: jar.id, // 添加 jarId
       },
       include: {
         author: {
-          select: {
-            id: true,
-            email: true,
-          }
+          select: { email: true }
         }
       }
     });
 
     return firefly;
-  }
-
-  async findAll(userId: string) {
-    // 1. 根据 userId 找到用户所在的 Jar
-    const jar = await this.prisma.jar.findFirst({
-      where: {
-        OR: [
-          { user1Id: userId },
-          { user2Id: userId }
-        ]
-      }
-    });
-
-    if (!jar) {
-      // 如果用户没有 Jar，返回空数组
-      return [];
-    }
-
-    // 2. 返回这个 Jar 下的所有萤火虫
-    const fireflies = await this.prisma.firefly.findMany({
-      where: {
-        jarId: jar.id
-      },
-      include: {
-        author: {
-          select: {
-            id: true,
-            email: true,
-          }
-        }
-      },
-      orderBy: {
-        createdAt: 'desc'
-      }
-    });
-
-    return fireflies;
   }
 }

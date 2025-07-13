@@ -13,6 +13,11 @@ export interface Firefly {
   author?: {
     email: string;
   };
-  createdAt?: string;
-  updatedAt?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface FirefliesListResponseDto {
+  fireflies: Firefly[];
+  total: number;
 } 

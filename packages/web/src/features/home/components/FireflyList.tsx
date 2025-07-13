@@ -1,37 +1,29 @@
 // src/features/home/components/FireflyList.tsx
-import { useFireflies } from "../api/useFireflies";
-import { type Firefly } from "../types";
+import { useFireflies } from '../api/useFireflies';
 
-export function FireflyList() {
-  const { data: fireflies, isLoading, error } = useFireflies();
-
-  if (isLoading) {
-    return <div>加载中...</div>;
-  }
-
-  if (error) {
-    return <div className="text-red-500">加载失败</div>;
-  }
-
-  if (!fireflies || fireflies.length === 0) {
-    return <div className="text-gray-500 text-center py-8">还没有萤火虫，快来发送第一条吧！</div>;
-  }
-
+const FireflyList = () => {
+  const { data } = useFireflies();
+  
+  // 从 data 中解构出 fireflies 数组
+  const fireflies = data?.fireflies || [];
+  
   return (
-    <ul className="space-y-2">
-      {fireflies.map((firefly: Firefly) => (
-        <li key={firefly.id} className="border-b py-2">
-          <div className="text-gray-800">{firefly.content}</div>
-          <div className="text-xs text-gray-400 mt-1">
-            {firefly.author?.email}
-            {firefly.createdAt && (
-              <span className="ml-2">
-                {new Date(firefly.createdAt).toLocaleString()}
-              </span>
-            )}
-          </div>
-        </li>
+    <div className="space-y-4">
+      {fireflies.map((firefly) => (
+        <div key={firefly.id} className="bg-white p-4 rounded-lg shadow">
+          <p className="text-gray-800">{firefly.content}</p>
+          {firefly.author && (
+            <p className="text-sm text-gray-500 mt-2">
+              作者: {firefly.author.email}
+            </p>
+          )}
+          <p className="text-xs text-gray-400 mt-1">
+            {new Date(firefly.createdAt).toLocaleString()}
+          </p>
+        </div>
       ))}
-    </ul>
+    </div>
   );
-} 
+};
+
+export default FireflyList; 

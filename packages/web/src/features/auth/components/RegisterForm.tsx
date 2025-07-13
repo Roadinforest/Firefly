@@ -1,11 +1,10 @@
-// src/features/auth/components/LoginForm.tsx
+// src/features/auth/components/RegisterForm.tsx
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate, Link } from "react-router-dom";
 import { toast } from "sonner";
-import { useAuthStore } from "@/store";
-import { loginSchema, type LoginFormValues } from "../types";
-import { useLogin } from "../api/useLogin";
+import { registerSchema, type RegisterFormValues } from "../types";
+import { useRegister } from "../api/useRegister";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -25,26 +24,24 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-export function LoginForm() {
+export function RegisterForm() {
   const navigate = useNavigate();
-  const { setToken } = useAuthStore();
-  const loginMutation = useLogin();
+  const registerMutation = useRegister();
 
-  const form = useForm<LoginFormValues>({
-    resolver: zodResolver(loginSchema),
+  const form = useForm<RegisterFormValues>({
+    resolver: zodResolver(registerSchema),
     defaultValues: { email: "", password: "" },
   });
 
-  async function onSubmit(values: LoginFormValues) {
-    loginMutation.mutate(values, {
-      onSuccess: (data) => {
-        setToken(data.access_token);
-        toast.success("Login Successful");
-        navigate("/");
+  async function onSubmit(values: RegisterFormValues) {
+    registerMutation.mutate(values, {
+      onSuccess: () => {
+        toast.success("注册成功，请登录");
+        navigate("/login");
       },
-      onError: () => {
-        toast.error("Login Failed", {
-          description: "Please check your credentials.",
+      onError: (error: any) => {
+        toast.error("注册失败", {
+          description: error.response?.data?.message || "请检查您的信息。",
         });
       },
     });
@@ -53,9 +50,9 @@ export function LoginForm() {
   return (
     <Card className="w-[350px]">
       <CardHeader>
-        <CardTitle>Login to Firefly</CardTitle>
+        <CardTitle>注册 Firefly</CardTitle>
         <CardDescription>
-          Enter your credentials to access your account.
+          创建您的账户以开始使用。
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -66,7 +63,7 @@ export function LoginForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>邮箱</FormLabel>
                   <FormControl>
                     <Input placeholder="you@example.com" {...field} />
                   </FormControl>
@@ -79,7 +76,7 @@ export function LoginForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>密码</FormLabel>
                   <FormControl>
                     <Input type="password" placeholder="••••••••" {...field} />
                   </FormControl>
@@ -88,17 +85,17 @@ export function LoginForm() {
               )}
             />
             <Button type="submit" className="w-full">
-              Login
+              注册
             </Button>
           </form>
         </Form>
         <div className="mt-4 text-center text-sm">
-          <span className="text-muted-foreground">Don't have an account? </span>
-          <Link to="/register" className="text-primary hover:underline">
-            Register here
+          <span className="text-muted-foreground">已有账户？</span>
+          <Link to="/login" className="text-primary hover:underline">
+            点击登录
           </Link>
         </div>
       </CardContent>
     </Card>
   );
-}
+} 
