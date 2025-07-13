@@ -51,7 +51,7 @@ export function FireflyForm() {
                 <Input 
                   placeholder={t('firefly.contentPlaceholder')} 
                   {...field} 
-                  className="border p-2"
+                  className="border"
                 />
               </FormControl>
               <FormMessage />
@@ -60,7 +60,6 @@ export function FireflyForm() {
         />
         <Button 
           type="submit" 
-          className="bg-green-500 text-white px-4 rounded"
           disabled={createFireflyMutation.isPending}
         >
           {createFireflyMutation.isPending ? t('common.sending') : t('common.send')}

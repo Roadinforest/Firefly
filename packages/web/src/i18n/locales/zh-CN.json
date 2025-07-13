@@ -99,6 +99,12 @@
     "en": "English",
     "switchLanguage": "切换语言"
   },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色",
+    "system": "系统",
+    "toggleTheme": "切换主题"
+  },
   "errors": {
     "networkError": "网络错误",
     "serverError": "服务器错误",

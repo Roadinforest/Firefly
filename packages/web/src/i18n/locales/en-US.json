@@ -98,6 +98,12 @@
     "en": "English",
     "switchLanguage": "Switch Language"
   },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "toggleTheme": "Toggle theme"
+  },
   "errors": {
     "networkError": "Network Error",
     "serverError": "Server Error",

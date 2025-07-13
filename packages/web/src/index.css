@@ -20,14 +20,21 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
+
+  --background: oklch(1 0 0);                /* 纯白 */
+  --foreground: oklch(0.15 0 0);             /* 深灰/黑 */
+
+  --primary: oklch(1 0 0);                   /* 主按钮底色=白色 */
+  --primary-foreground: oklch(0.15 0 0);     /* 主按钮字色=深色 */
+
+  --accent: oklch(1 0 0);                    /* ghost按钮悬停底色=白色 */
+  --accent-foreground: oklch(0.15 0 0);      /* ghost按钮悬停字色=深色 */
+
+  /* 其它变量可仿照 */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
   --muted: oklch(0.968 0.007 247.896);
@@ -144,16 +151,13 @@ button:focus-visible {
 }
 
 .dark {
-  --background: oklch(0.129 0.042 264.695);
-  --foreground: oklch(0.984 0.003 247.858);
+  --background: oklch(0.18 0.01 265);        /* 深灰/黑 */
+
+
   --card: oklch(0.208 0.042 265.755);
   --card-foreground: oklch(0.984 0.003 247.858);
   --popover: oklch(0.208 0.042 265.755);
   --popover-foreground: oklch(0.984 0.003 247.858);
-  --primary: oklch(0.929 0.013 255.508);
-  --primary-foreground: oklch(0.208 0.042 265.755);
-  --secondary: oklch(0.279 0.041 260.031);
-  --secondary-foreground: oklch(0.984 0.003 247.858);
   --muted: oklch(0.279 0.041 260.031);
   --muted-foreground: oklch(0.704 0.04 256.788);
   --accent: oklch(0.279 0.041 260.031);
@@ -169,7 +173,7 @@ button:focus-visible {
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: oklch(0.208 0.042 265.755);
   --sidebar-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
+  /* --sidebar-primary: oklch(0.488 0.243 264.376); */
   --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
   --sidebar-accent: oklch(0.279 0.041 260.031);
   --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
@@ -184,4 +188,9 @@ button:focus-visible {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+html, body, #root {
+  height: 100%;
+  min-height: 100vh;
 }

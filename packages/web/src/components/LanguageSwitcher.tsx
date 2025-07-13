@@ -14,7 +14,6 @@ export function LanguageSwitcher() {
 
   return (
     <Button
-      variant="ghost"
       size="sm"
       onClick={toggleLanguage}
       className="flex items-center gap-2"

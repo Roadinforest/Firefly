@@ -41,12 +41,15 @@ export function LoginForm() {
     loginMutation.mutate(values, {
       onSuccess: (data) => {
         setToken(data.access_token);
-        toast.success(t('auth.login.loginSuccess'));
+        toast.success(t('auth.login.loginSuccess'), {
+          duration: 300,
+        });
         navigate("/");
       },
       onError: () => {
         toast.error(t('auth.login.loginFailed'), {
           description: t('auth.login.checkCredentials'),
+          duration: 3000,
         });
       },
     });
